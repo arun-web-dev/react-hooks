@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import CComponent from "./Components/CComponent";
+import { FComponent } from "./Components/FComponent";
 
 function App() {
   const [flag, setFlag] = useState(true);
@@ -10,8 +11,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <button onClick={() => setFlag(!flag)}>Toggle Class Component</button>
-          {flag ? <CComponent /> : ""}
+          <button onClick={() => setFlag(!flag)}>
+            Toggle Function Component
+          </button>
+          {flag ? <FComponent /> : ""}
         </div>
       </header>
     </div>

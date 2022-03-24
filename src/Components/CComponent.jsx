@@ -7,7 +7,8 @@ class CComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log("I'm from did Mount method");
+    console.log(this);
+    console.log("I'm from Did Mount method");
     this.interval = setInterval(this.showDate, 1000);
   }
 
