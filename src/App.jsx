@@ -1,5 +1,4 @@
-import { useState, useMemo } from "react";
-import logo from "./logo.svg";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import "./App.css";
 
 function App() {
@@ -14,6 +13,13 @@ function App() {
     return factorial(counter);
   }, [counter]);
 
+  const [name, setName] = useState("");
+
+  const displayName = useCallback(() => {
+    return name;
+  }, [name]);
+
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -21,12 +27,43 @@ function App() {
           Factorial of {counter} is : <span>{result}</span>
         </h1>
         <div>
-          <button onClick={() => setCounter - 1}>Decremenet</button>
-          <button onClick={() => setCounter + 1}>Increment</button>
+          <button onClick={() => setCounter(counter - 1)}>Decremenet</button>
+          <button onClick={() => setCounter(counter + 1)}>Increment</button>
+        </div>
+        <div>
+          <div>
+            <label>Enter Name</label>
+          </div>
+          <input
+            type="text"
+            placeholder="enter name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <DisplayName displayName={displayName}></DisplayName>
         </div>
       </header>
     </div>
   );
 }
+
+const DisplayName = React.memo(({ displayName }) => {
+  const [value, setValue] = useState("");
+  useEffect(() => {
+    setValue(displayName());
+    console.log("Component renderd");
+  }, [displayName]);
+  return <p>{`My name is ${value}`}</p>;
+});
+
+const factorial = (n) => {
+  if (n < 0) {
+    return -1;
+  }
+  if (n === 0) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+};
 
 export default App;
